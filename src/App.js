@@ -59,9 +59,18 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         {this.state.showSearchPage ? (
-          <SearchPage />
+          <SearchPage onNavigate = {() => {
+            this.setState(() => ({
+              showSearchPage: false
+            }))
+          }}
+          />
         ) : (
-          <MainPage />
+          <MainPage onNavigate = {() => {
+            this.setState(() => ({
+              showSearchPage: true
+            }))
+          }}/>
         )}
       </div>
     );
