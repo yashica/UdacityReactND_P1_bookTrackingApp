@@ -2,6 +2,15 @@ import React, { Component } from 'react'
 import BookShelfChanger from './BookShelfChanger'
 
 class Book extends Component {
+    state = {
+        currentShelf: this.props.shelf,
+        shelfFlavor: this.props.shelfFlavor
+    };
+
+    moveBook = (shelf_from, shelf_to) => {
+        this.props.onMoveBook(this.props.bookData,shelf_from,shelf_to);
+    }
+
     render() {
         const { author, title, coverimgURL } = this.props.bookData
         return (<div className="book">
@@ -14,12 +23,16 @@ class Book extends Component {
               backgroundImage: `url( ${ coverimgURL })`
             }}
           />
-          <BookShelfChanger />
+          <BookShelfChanger 
+                shelf = { this.props.shelf }
+                onMoveBook={ this.moveBook }
+            />
         </div>
         <div className="book-title">
           { title }
         </div>
         <div className="book-authors">{ author }</div>
+        <div>Shelf = {this.props.shelf}</div>
       </div>
 
         )
