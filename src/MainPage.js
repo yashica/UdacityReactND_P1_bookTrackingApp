@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import BooksGrid from "./BooksGrid";
+import BookShelf from "./BookShelf";
 
 class MainPage extends Component {
   state = {
@@ -66,24 +66,9 @@ class MainPage extends Component {
             </div>
             <div className="list-books-content">
               <div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Currently Reading</h2>
-                  <div className="bookshelf-books">
-                    <BooksGrid books={ this.state.books_currentlyReading } />
-                  </div>
-                </div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Want to Read</h2>
-                  <div className="bookshelf-books">
-                  <BooksGrid books={ this.state.books_wantToRead } />
-                  </div>
-                </div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Read</h2>
-                  <div className="bookshelf-books">
-                  <BooksGrid books={ this.state.books_red } />
-                  </div>
-                </div>
+                <BookShelf caption='Currently Reading' books={ this.state.books_currentlyReading }/>
+                <BookShelf caption='Want to Read' books={ this.state.books_wantToRead }/>
+                <BookShelf caption='Read' books={ this.state.books_red }/>
               </div>
             </div>
             <div className="open-search">
