@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import BooksGrid from "./BooksGrid";
 
 class BookShelf extends Component {
-    state = {
+/*     state = {
         shelfID: this.props.shelfID,
-    }; 
+    };  */
 
     render() {
         return (
@@ -12,7 +12,7 @@ class BookShelf extends Component {
                 <h2 className="bookshelf-title">{this.props.caption}</h2>
                 <div className="bookshelf-books">
                     <BooksGrid 
-                        shelf={ this.state.shelfID } 
+                        //shelf={ this.state.shelfID } 
                         books={ this.props.books }
                         onMoveBook={ this.props.onMoveBook } 
                     />

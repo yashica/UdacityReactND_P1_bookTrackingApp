@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import BookShelfChanger from './BookShelfChanger'
 
 class Book extends Component {
-    state = {
+/*     state = {
         currentShelf: this.props.shelf,
         shelfFlavor: this.props.shelfFlavor
-    };
+    }; */
 
     moveBook = (shelf_to) => {
         this.props.onMoveBook(this.props.bookData, shelf_to);
@@ -20,18 +20,18 @@ class Book extends Component {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: `url( ${ imageLinks.thumbnail })`
+              backgroundImage: imageLinks ? `url(${ imageLinks.thumbnail })`:''
             }}
           />
           <BookShelfChanger 
-                shelf = { this.props.shelf }
+                shelf = { this.props.bookData.shelf }
                 onMoveBook={ this.moveBook }
             />
         </div>
         <div className="book-title">
           { title }
         </div>
-        <div className="book-authors">{ authors }</div>
+        <div className="book-authors">{ authors ? authors : 'No author available'}</div>
       </div>
 
         )

@@ -14,7 +14,7 @@ class MainPage extends Component {
           <div>
             <BookShelf 
               caption='Currently Reading' 
-              shelfID='currentlyReading' 
+              //shelfID='currentlyReading' 
               books={ this.props.books.filter((book) => {
                 return book.shelf === 'currentlyReading'
               })}
@@ -22,7 +22,7 @@ class MainPage extends Component {
             />
             <BookShelf 
               caption='Want to Read' 
-              shelfID='wantToRead' 
+              //shelfID='wantToRead' 
               books={ this.props.books.filter((book) => {
                 return book.shelf === 'wantToRead'
               })}
@@ -30,7 +30,7 @@ class MainPage extends Component {
             />
             <BookShelf 
               caption='Read' 
-              shelfID='read' 
+              //shelfID='read' 
               books={ this.props.books.filter((book) => {
                 return book.shelf === 'read'
               })}
@@ -39,7 +39,7 @@ class MainPage extends Component {
           </div>
         </div>
         <div className="open-search">
-          <Link to="/search" /*onClick = { this.props.onNavigate }onClick={() => this.setState({ showSearchPage: true })}*/>
+          <Link to="/search">
             <button>Add a book</button>
           </Link>
         </div>

@@ -9,34 +9,6 @@ class SearchPage extends Component {
     books: []
   }
 
-  updateQuery = (query) => {
-    //update query
-    this.setState(() => ({
-      query: query.trim()
-    }))
-    this.updateBooks();
-  }
-
-  updateBooks = () => {
-    const query = this.state.query
-    if(query===''){ //if query string is empty, show all books
-        BooksAPI.getAll().then((books) => {
-        this.setState(() => ({
-          books: books
-        }))
-        console.log(books);
-      })
-    } else {
-      //update books based on query
-      BooksAPI.search(query.trim()).then((books_found) => {
-        this.setState(() => ({
-          books: books_found ? books_found : []
-        }))
-        console.log(this.state.books);
-      })
-    }
-  }
-
   componentDidMount() {
     BooksAPI.getAll()
     .then((books) => {
@@ -47,14 +19,40 @@ class SearchPage extends Component {
     })
   }
 
-  moveBookToShelf = (book, shelf_from, shelf_to) => {
-    this.setState((currentState) => ({
-      books: currentState.books.filter((b) => {
-        return b.title !== book.title
-      })
+  updateQuery = (e) => {
+    e.preventDefault();
+    const query = e.target.value.trim();
+    this.setState((prevState) => ({
+      query: query
     }))
-    this.props.onMoveBook(book, shelf_from, shelf_to)
-    return 0;
+    this.updateBooks(query);
+  }
+
+  updateBooks = (query) => {
+    console.log('In update books')
+    if(query===''){ //if query string is empty, show all available books
+        BooksAPI.getAll().then((books_all) => {
+        this.setState((prevState) => ({
+          books: books_all
+        }))
+        console.log(this.state.books);
+      })
+    } else {
+      //update books based on query
+      BooksAPI.search(query).then((books_found) => {
+        if( books_found && books_found.length > 0 ){
+          this.setState((prevState) => ({
+            books: books_found
+          }))
+        }
+        else {
+          this.setState((prevState) => ({
+            books: []
+          }))
+        }
+        console.log("Books after search" + this.state.books);
+      })
+    }
   }
 
   render() {
@@ -81,15 +79,14 @@ class SearchPage extends Component {
               type="text" 
               placeholder="Search by title or author"
               value={this.state.query}
-              onChange={(event) => this.updateQuery(event.target.value)} 
+              onChange={(event) => this.updateQuery(event)} 
             />
           </div>
         </div>
         <div className="search-books-results">
           <BooksGrid 
-            shelf={ "none" } 
             books={ this.state.books }
-            onMoveBook={ this.moveBookToShelf } 
+            onMoveBook={ this.props.onMoveBook } 
             />
         </div>
       </div>
