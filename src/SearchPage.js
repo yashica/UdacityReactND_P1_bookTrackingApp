@@ -41,6 +41,9 @@ class SearchPage extends Component {
       //update books based on query
       BooksAPI.search(query).then((books_found) => {
         if( books_found && books_found.length > 0 ){
+
+          this.correctShelfs(books_found);
+
           this.setState((prevState) => ({
             books: books_found
           }))
@@ -53,6 +56,20 @@ class SearchPage extends Component {
         console.log("Books after search" + this.state.books);
       })
     }
+  }
+
+  moveBook = (book, shelf_to) => {
+    this.props.onMoveBook(book, shelf_to);
+    this.updateBooks(this.state.query);
+  }
+
+  correctShelfs = (foundBooks) => {
+    foundBooks.map((foundBook) =>
+      {
+        const bookWithSameID = this.props.books.find(ownedBook => ownedBook.id === foundBook.id);
+        return foundBook.shelf = bookWithSameID ? bookWithSameID.shelf : 'none'
+      }  
+    )
   }
 
   render() {
@@ -86,7 +103,7 @@ class SearchPage extends Component {
         <div className="search-books-results">
           <BooksGrid 
             books={ this.state.books }
-            onMoveBook={ this.props.onMoveBook } 
+            onMoveBook={ this.moveBook } 
             />
         </div>
       </div>

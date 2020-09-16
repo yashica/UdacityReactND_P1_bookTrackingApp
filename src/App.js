@@ -50,6 +50,7 @@ class BooksApp extends Component {
 
           <Route path='/search' render={() => (
             <SearchPage 
+              books={ this.state.books }
               onMoveBook={this.moveBook}
             />
           ) }/>
