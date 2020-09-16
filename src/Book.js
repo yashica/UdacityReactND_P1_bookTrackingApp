@@ -2,11 +2,6 @@ import React, { Component } from 'react'
 import BookShelfChanger from './BookShelfChanger'
 
 class Book extends Component {
-/*     state = {
-        currentShelf: this.props.shelf,
-        shelfFlavor: this.props.shelfFlavor
-    }; */
-
     moveBook = (shelf_to) => {
         this.props.onMoveBook(this.props.bookData, shelf_to);
     }

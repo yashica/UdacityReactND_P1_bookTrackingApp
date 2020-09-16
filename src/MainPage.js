@@ -1,10 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import BookShelf from "./BookShelf";
 
-class MainPage extends Component {
+const MainPage = props => {
     
-  render() {
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -14,27 +13,24 @@ class MainPage extends Component {
           <div>
             <BookShelf 
               caption='Currently Reading' 
-              //shelfID='currentlyReading' 
-              books={ this.props.books.filter((book) => {
+              books={ props.books.filter((book) => {
                 return book.shelf === 'currentlyReading'
               })}
-              onMoveBook={this.props.onMoveBook}
+              onMoveBook={ props.onMoveBook }
             />
             <BookShelf 
               caption='Want to Read' 
-              //shelfID='wantToRead' 
-              books={ this.props.books.filter((book) => {
+              books={ props.books.filter((book) => {
                 return book.shelf === 'wantToRead'
               })}
-              onMoveBook={this.props.onMoveBook}
+              onMoveBook={ props.onMoveBook }
             />
             <BookShelf 
               caption='Read' 
-              //shelfID='read' 
-              books={ this.props.books.filter((book) => {
+              books={ props.books.filter((book) => {
                 return book.shelf === 'read'
               })}
-              onMoveBook={this.props.onMoveBook}
+              onMoveBook={ props.onMoveBook }
             />
           </div>
         </div>
@@ -45,7 +41,6 @@ class MainPage extends Component {
         </div>
       </div>
     );
-  }
 }
 
 export default MainPage
