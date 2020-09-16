@@ -15,19 +15,25 @@ class MainPage extends Component {
             <BookShelf 
               caption='Currently Reading' 
               shelfID='currentlyReading' 
-              books={ this.props.books_currentlyReading}
+              books={ this.props.books.filter((book) => {
+                return book.shelf === 'currentlyReading'
+              })}
               onMoveBook={this.props.onMoveBook}
             />
             <BookShelf 
               caption='Want to Read' 
               shelfID='wantToRead' 
-              books={ this.props.books_wantToRead }
+              books={ this.props.books.filter((book) => {
+                return book.shelf === 'wantToRead'
+              })}
               onMoveBook={this.props.onMoveBook}
             />
             <BookShelf 
               caption='Read' 
               shelfID='read' 
-              books={ this.props.books_read }
+              books={ this.props.books.filter((book) => {
+                return book.shelf === 'read'
+              })}
               onMoveBook={this.props.onMoveBook}
             />
           </div>

@@ -9,7 +9,7 @@ class BookShelfChanger extends Component {
     }
   
     handleChange(event) {
-      this.props.onMoveBook(this.state.value,event.target.value)
+      this.props.onMoveBook(event.target.value)
     }
 
     render() {

@@ -7,12 +7,12 @@ class Book extends Component {
         shelfFlavor: this.props.shelfFlavor
     };
 
-    moveBook = (shelf_from, shelf_to) => {
-        this.props.onMoveBook(this.props.bookData,shelf_from,shelf_to);
+    moveBook = (shelf_to) => {
+        this.props.onMoveBook(this.props.bookData, shelf_to);
     }
 
     render() {
-        const { author, title, coverimgURL } = this.props.bookData
+        const { authors, title, imageLinks } = this.props.bookData
         return (<div className="book">
         <div className="book-top">
           <div
@@ -20,7 +20,7 @@ class Book extends Component {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: `url( ${ coverimgURL })`
+              backgroundImage: `url( ${ imageLinks.thumbnail })`
             }}
           />
           <BookShelfChanger 
@@ -31,8 +31,7 @@ class Book extends Component {
         <div className="book-title">
           { title }
         </div>
-        <div className="book-authors">{ author }</div>
-        <div>Shelf = {this.props.shelf}</div>
+        <div className="book-authors">{ authors }</div>
       </div>
 
         )
