@@ -21,7 +21,7 @@ class SearchPage extends Component {
 
   updateQuery = (e) => {
     e.preventDefault();
-    const query = e.target.value.trim();
+    const query = e.target.value;
     this.setState((prevState) => ({
       query: query
     }))
@@ -30,13 +30,19 @@ class SearchPage extends Component {
 
   updateBooks = (query) => {
     console.log('In update books')
-    if(query===''){ //if query string is empty, show all available books
+    if(query==='')
+    { //if query string is empty, don't show any books
+      this.setState((prevState) => ({
+        books: []
+      }))
+        /* 
+        //if query string is empty, show all books (like in the beginning)
         BooksAPI.getAll().then((books_all) => {
         this.setState((prevState) => ({
           books: books_all
         }))
         console.log(this.state.books);
-      })
+      }) */
     } else {
       //update books based on query
       BooksAPI.search(query).then((books_found) => {
@@ -101,10 +107,16 @@ class SearchPage extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <BooksGrid 
-            books={ this.state.books }
-            onMoveBook={ this.moveBook } 
-            />
+          {this.state.books.length <= 0
+            ? <div>
+                <br />
+                No Books Found
+              </div>
+            : <BooksGrid 
+                books={ this.state.books }
+                onMoveBook={ this.moveBook } 
+              />
+          }
         </div>
       </div>
     );
